@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="iPhone X H5 适配通用方案说明iPhone X 适配理论上需要在 UI 预先适配的基础上再做前端页面的适配，以保证 iPhone X 下的最佳体验。但因为项目复杂，涉及改动点较多，可暂时采用此方案。 局限性主要体现在fixed元素无法使用通用的样式适配。且涉及到是否吸底，吸底元素是否可以简单移动位置还是需要增加元素高度又能保证中间内容看起来“垂直居中”。 需要适配点 整体页面显示位置（内">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iPhone X H5 适配通用方案">
+<meta property="og:url" content="http://0b11111110.com/2018/01/14/2018-1-14-iPhoneX-fit/index.html">
+<meta property="og:site_name" content="张泽的个人博客">
+<meta property="og:description" content="iPhone X H5 适配通用方案说明iPhone X 适配理论上需要在 UI 预先适配的基础上再做前端页面的适配，以保证 iPhone X 下的最佳体验。但因为项目复杂，涉及改动点较多，可暂时采用此方案。 局限性主要体现在fixed元素无法使用通用的样式适配。且涉及到是否吸底，吸底元素是否可以简单移动位置还是需要增加元素高度又能保证中间内容看起来“垂直居中”。 需要适配点 整体页面显示位置（内">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-15T14:43:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iPhone X H5 适配通用方案">
+<meta name="twitter:description" content="iPhone X H5 适配通用方案说明iPhone X 适配理论上需要在 UI 预先适配的基础上再做前端页面的适配，以保证 iPhone X 下的最佳体验。但因为项目复杂，涉及改动点较多，可暂时采用此方案。 局限性主要体现在fixed元素无法使用通用的样式适配。且涉及到是否吸底，吸底元素是否可以简单移动位置还是需要增加元素高度又能保证中间内容看起来“垂直居中”。 需要适配点 整体页面显示位置（内">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://0b11111110.com/2018/01/14/2018-1-14-iPhoneX-fit/"/>
+
+
+
+
+
+  <title>iPhone X H5 适配通用方案 | 张泽的个人博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">张泽的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">乐观 / 自省 / 坚持</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://0b11111110.com/2018/01/14/2018-1-14-iPhoneX-fit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhang Ze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张泽的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iPhone X H5 适配通用方案</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-14T00:00:00+08:00">
+                2018-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="iPhone-X-H5-适配通用方案"><a href="#iPhone-X-H5-适配通用方案" class="headerlink" title="iPhone X H5 适配通用方案"></a>iPhone X H5 适配通用方案</h2><h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>iPhone X 适配理论上需要在 UI 预先适配的基础上再做前端页面的适配，以保证 iPhone X 下的最佳体验。但因为项目复杂，涉及改动点较多，可暂时采用此方案。</p>
+<p>局限性主要体现在<code>fixed</code>元素无法使用通用的样式适配。且涉及到<code>是否吸底</code>，吸底元素是否可以简单移动位置还是需要增加元素高度又能保证中间内容看起来“垂直居中”。</p>
+<h3 id="需要适配点"><a href="#需要适配点" class="headerlink" title="需要适配点"></a>需要适配点</h3><ul>
+<li>整体页面显示位置（内容）</li>
+<li>fixed + bottom = 0</li>
+<li>fixed + bottom &gt; 0</li>
+<li>absolute + bottom = 0</li>
+<li>瀑布流列表加载中文案可能触底 - <strong>组件内修改</strong></li>
+<li>沉浸（状态）式H5页面头部高度 - <strong>需个性化修改</strong></li>
+</ul>
+<h3 id="通用解决方案"><a href="#通用解决方案" class="headerlink" title="通用解决方案"></a>通用解决方案</h3><p>针对前面4个适配点，给出适配方案如下：</p>
+<p>1.修改 meta 标签中，加入<code>viewport-fit=cover</code>，使在 iPhone X 下页面全屏覆盖，并且后面相应的 hack 属性能生效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&quot;viewport&quot; content=&quot;...,viewport-fit=cover&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>2.修改 body 内边距。在通用 CSS 中添加下面代码。其中<code>constant</code>和<code>env</code>是 iOS 10+ 上才能识别的 CSS 方法，<code>safe-area-inset-bottom</code>是底部的安全距离，一般是<code>34px</code>（防止 iPhone X Plus 之类的，还是用个统一的官方变量比较好）（注意：样式需要放到最后，保证不会被覆盖）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@supports (padding-bottom: constant(safe-area-inset-bottom)) &#123;</span><br><span class="line">    body &#123;</span><br><span class="line">        padding-bottom: constant(safe-area-inset-bottom);</span><br><span class="line">        padding-bottom: env(safe-area-inset-bottom);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.针对<code>fixed</code>定位的元素，因为其是相对于<code>浏览器窗口</code>进行定位的，所以 body 的内容区域无法限制其位置，需要调整其位置。采用以下通用 js 解决。(注意：需放置页面最后，保证页面元素已渲染到页面，<strong>用户能感知到页面中 fixed 定位元素会在显示后往上移一段</strong>，至于是否会遮挡到中间滚动块还待观察，因此建议在项目允许的情况下，对<code>fixed</code>元素最好用 CSS 做个性化适配)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// 底部安全距离</span><br><span class="line">const IPHONEX_BOTTOM_HEIGHT = 34;</span><br><span class="line"></span><br><span class="line">// 可添加到通用UA判断中</span><br><span class="line">function isIphoneX()&#123;</span><br><span class="line">    return /iphone/gi.test(window.navigator.userAgent) &amp;&amp; (screen.height == 812 &amp;&amp; screen.width == 375)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if(isIphoneX())&#123;</span><br><span class="line">    $(&apos;*&apos;).filter(function(index, item)&#123;</span><br><span class="line">        return $(item).css(&apos;position&apos;) === &apos;fixed&apos;;</span><br><span class="line">    &#125;).map(function(index, item)&#123;</span><br><span class="line">        var itemTop = $(item).position().top;</span><br><span class="line">        if(itemTop &gt; IPHONEX_BOTTOM_HEIGHT)&#123;</span><br><span class="line">            $(item).css(&apos;top&apos;, itemTop - IPHONEX_BOTTOM_HEIGHT);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="http://www.yyyweb.com/5006.html" target="_blank" rel="noopener">http://www.yyyweb.com/5006.html</a></li>
+<li><a href="https://www.cnblogs.com/zhangruiqi/p/7831019.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhangruiqi/p/7831019.html</a></li>
+<li><a href="https://github.com/limbowang/is-iphonex/blob/master/index.js" target="_blank" rel="noopener">https://github.com/limbowang/is-iphonex/blob/master/index.js</a></li>
+<li><a href="https://webkit.org/blog/7929/designing-websites-for-iphone-x/?hmsr=funteas.com&amp;utm_medium=funteas.com&amp;utm_source=funteas.com" target="_blank" rel="noopener">https://webkit.org/blog/7929/designing-websites-for-iphone-x/?hmsr=funteas.com&amp;utm_medium=funteas.com&amp;utm_source=funteas.com</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/14/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Zhang Ze</p>
+              <p class="site-description motion-element" itemprop="description">张泽的个人博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/0b11111110" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ze.zh@hotmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#iPhone-X-H5-适配通用方案"><span class="nav-number">1.</span> <span class="nav-text">iPhone X H5 适配通用方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#说明"><span class="nav-number">1.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需要适配点"><span class="nav-number">1.2.</span> <span class="nav-text">需要适配点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通用解决方案"><span class="nav-number">1.3.</span> <span class="nav-text">通用解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">1.4.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhang Ze</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
